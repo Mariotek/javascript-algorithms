@@ -115,19 +115,12 @@ export default class Graph {
    */
   findEdge(startVertex, endVertex) {
     const vertex = this.getVertexByKey(startVertex.getKey());
-    return vertex.findEdge(endVertex);
-  }
 
-  /**
-   * @param {string} vertexKey
-   * @returns {GraphVertex}
-   */
-  findVertexByKey(vertexKey) {
-    if (this.vertices[vertexKey]) {
-      return this.vertices[vertexKey];
+    if (!vertex) {
+      return null;
     }
 
-    return null;
+    return vertex.findEdge(endVertex);
   }
 
   /**

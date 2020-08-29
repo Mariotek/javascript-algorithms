@@ -13,7 +13,7 @@ describe('Stack', () => {
     stack.push(1);
     stack.push(2);
 
-    expect(stack.toString()).toBe('1,2');
+    expect(stack.toString()).toBe('2,1');
   });
 
   it('should peek data from stack', () => {
@@ -31,11 +31,11 @@ describe('Stack', () => {
   it('should check if stack is empty', () => {
     const stack = new Stack();
 
-    expect(stack.isEmpty()).toBeTruthy();
+    expect(stack.isEmpty()).toBe(true);
 
     stack.push(1);
 
-    expect(stack.isEmpty()).toBeFalsy();
+    expect(stack.isEmpty()).toBe(false);
   });
 
   it('should pop data from stack', () => {
@@ -47,7 +47,7 @@ describe('Stack', () => {
     expect(stack.pop()).toBe(2);
     expect(stack.pop()).toBe(1);
     expect(stack.pop()).toBeNull();
-    expect(stack.isEmpty()).toBeTruthy();
+    expect(stack.isEmpty()).toBe(true);
   });
 
   it('should be possible to push/pop objects', () => {
@@ -56,9 +56,9 @@ describe('Stack', () => {
     stack.push({ value: 'test1', key: 'key1' });
     stack.push({ value: 'test2', key: 'key2' });
 
-    const stringifier = value => `${value.key}:${value.value}`;
+    const stringifier = (value) => `${value.key}:${value.value}`;
 
-    expect(stack.toString(stringifier)).toBe('key1:test1,key2:test2');
+    expect(stack.toString(stringifier)).toBe('key2:test2,key1:test1');
     expect(stack.pop().value).toBe('test2');
     expect(stack.pop().value).toBe('test1');
   });

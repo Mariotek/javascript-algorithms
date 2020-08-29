@@ -22,7 +22,7 @@ describe('Queue', () => {
     queue.enqueue({ value: 'test1', key: 'key1' });
     queue.enqueue({ value: 'test2', key: 'key2' });
 
-    const stringifier = value => `${value.key}:${value.value}`;
+    const stringifier = (value) => `${value.key}:${value.value}`;
 
     expect(queue.toString(stringifier)).toBe('key1:test1,key2:test2');
     expect(queue.dequeue().value).toBe('test1');
@@ -44,11 +44,11 @@ describe('Queue', () => {
   it('should check if queue is empty', () => {
     const queue = new Queue();
 
-    expect(queue.isEmpty()).toBeTruthy();
+    expect(queue.isEmpty()).toBe(true);
 
     queue.enqueue(1);
 
-    expect(queue.isEmpty()).toBeFalsy();
+    expect(queue.isEmpty()).toBe(false);
   });
 
   it('should dequeue from queue in FIFO order', () => {
@@ -60,6 +60,6 @@ describe('Queue', () => {
     expect(queue.dequeue()).toBe(1);
     expect(queue.dequeue()).toBe(2);
     expect(queue.dequeue()).toBeNull();
-    expect(queue.isEmpty()).toBeTruthy();
+    expect(queue.isEmpty()).toBe(true);
   });
 });

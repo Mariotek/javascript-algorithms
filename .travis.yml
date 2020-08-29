@@ -1,10 +1,15 @@
-sudo: required
+os:
+  - linux
+  - osx
 dist: trusty
 language: node_js
 node_js:
-  - node
+  - "12"
+install:
+  - npm install -g codecov
+  - npm install
 script:
   - npm run ci
-  - npm run codecov
+  - codecov
 notifications:
   email: false

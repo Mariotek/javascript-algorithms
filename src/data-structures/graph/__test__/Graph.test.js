@@ -32,14 +32,14 @@ describe('Graph', () => {
     expect(graph.getAllVertices()[0]).toEqual(vertexA);
     expect(graph.getAllVertices()[1]).toEqual(vertexB);
 
-    const graphVertexA = graph.findVertexByKey(vertexA.getKey());
-    const graphVertexB = graph.findVertexByKey(vertexB.getKey());
+    const graphVertexA = graph.getVertexByKey(vertexA.getKey());
+    const graphVertexB = graph.getVertexByKey(vertexB.getKey());
 
     expect(graph.toString()).toBe('A,B');
     expect(graphVertexA).toBeDefined();
     expect(graphVertexB).toBeDefined();
 
-    expect(graph.findVertexByKey('not existing')).toBeNull();
+    expect(graph.getVertexByKey('not existing')).toBeUndefined();
 
     expect(graphVertexA.getNeighbors().length).toBe(1);
     expect(graphVertexA.getNeighbors()[0]).toEqual(vertexB);
@@ -60,8 +60,8 @@ describe('Graph', () => {
 
     graph.addEdge(edgeAB);
 
-    const graphVertexA = graph.findVertexByKey(vertexA.getKey());
-    const graphVertexB = graph.findVertexByKey(vertexB.getKey());
+    const graphVertexA = graph.getVertexByKey(vertexA.getKey());
+    const graphVertexB = graph.getVertexByKey(vertexB.getKey());
 
     expect(graph.toString()).toBe('A,B');
     expect(graphVertexA).toBeDefined();
@@ -87,9 +87,11 @@ describe('Graph', () => {
 
     const graphEdgeAB = graph.findEdge(vertexA, vertexB);
     const graphEdgeBA = graph.findEdge(vertexB, vertexA);
-    const graphEdgeAC = graph.findEdge(vertexB, vertexC);
+    const graphEdgeAC = graph.findEdge(vertexA, vertexC);
+    const graphEdgeCA = graph.findEdge(vertexC, vertexA);
 
     expect(graphEdgeAC).toBeNull();
+    expect(graphEdgeCA).toBeNull();
     expect(graphEdgeAB).toEqual(edgeAB);
     expect(graphEdgeBA).toEqual(edgeAB);
     expect(graphEdgeAB.weight).toBe(10);
@@ -108,9 +110,11 @@ describe('Graph', () => {
 
     const graphEdgeAB = graph.findEdge(vertexA, vertexB);
     const graphEdgeBA = graph.findEdge(vertexB, vertexA);
-    const graphEdgeAC = graph.findEdge(vertexB, vertexC);
+    const graphEdgeAC = graph.findEdge(vertexA, vertexC);
+    const graphEdgeCA = graph.findEdge(vertexC, vertexA);
 
     expect(graphEdgeAC).toBeNull();
+    expect(graphEdgeCA).toBeNull();
     expect(graphEdgeBA).toBeNull();
     expect(graphEdgeAB).toEqual(edgeAB);
     expect(graphEdgeAB.weight).toBe(10);
